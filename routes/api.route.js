@@ -9,7 +9,7 @@ let REFRESH_TOKEN =
 const oauth2Client = new google.auth.OAuth2(
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
-  "https://calmmind-beryl.vercel.app"
+  "https://callmindm3.vercel.app"
 );
 
 router.get("/", async (req, res, next) => {

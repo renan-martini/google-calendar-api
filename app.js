@@ -15,7 +15,7 @@ app.get("/", async (req, res, next) => {
 
 app.use(
   cors({
-    origin: "https://calmmind-beryl.vercel.app",
+    origin: "https://callmindm3.vercel.app",
   })
 );
 
