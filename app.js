@@ -15,7 +15,7 @@ app.get("/", async (req, res, next) => {
 
 app.use(
   cors({
-    origin: "https://frontend-ten-navy.vercel.app",
+    origin: "https://calmmind-beryl.vercel.app",
   })
 );
 

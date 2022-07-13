@@ -9,7 +9,7 @@ let REFRESH_TOKEN =
 const oauth2Client = new google.auth.OAuth2(
   GOOGLE_CLIENT_ID,
   GOOGLE_CLIENT_SECRET,
-  "https://frontend-ten-navy.vercel.app"
+  "https://calmmind-beryl.vercel.app"
 );
 
 router.get("/", async (req, res, next) => {
@@ -31,8 +31,14 @@ router.post("/create-tokens", async (req, res, next) => {
 
 router.post("/create-event", async (req, res, next) => {
   try {
-    const { summary, description, location, startDateTime, endDateTime } =
-      req.body;
+    const {
+      summary,
+      description,
+      location,
+      startDateTime,
+      endDateTime,
+      attendees,
+    } = req.body;
     oauth2Client.setCredentials({ refresh_token: REFRESH_TOKEN });
     const calendar = google.calendar("v3");
     const response = await calendar.events.insert({
@@ -45,8 +51,11 @@ router.post("/create-event", async (req, res, next) => {
         description: description,
         location: location,
         colorId: "6",
-        start: { dateTime: new Date(startDateTime) },
-        end: { dateTime: new Date(endDateTime) },
+        start: {
+          dateTime: new Date(startDateTime),
+          timeZone: "America/Sao_Paulo",
+        },
+        end: { dateTime: new Date(endDateTime), timeZone: "America/Sao_Paulo" },
         conferenceData: {
           createRequest: {
             requestId: "renanzinhoteste1234",
@@ -62,10 +71,7 @@ router.post("/create-event", async (req, res, next) => {
             { method: "popup", minutes: 10 },
           ],
         },
-        attendees: [
-          { email: "alexflavio.dev@gmail.com", organizer: true },
-          { email: "rodolfojaques13@gmail.com", organizer: true },
-        ],
+        attendees: attendees,
       },
     });
     res.send(response);
